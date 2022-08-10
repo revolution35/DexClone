@@ -62,6 +62,7 @@ function TokenTags({ currency }: { currency: Currency }) {
 
   const tag = tags[0];
 
+ 
   return (
     <TagContainer>
       <MouseoverTooltip text={tag.description}>
@@ -100,7 +101,36 @@ function CurrencyRow({
   const isOnSelectedList = isTokenOnList(selectedTokenList, currency);
   const customAdded = useIsUserAddedToken(currency);
   const balance = useCurrencyBalance(account ?? undefined, currency);
+  
+  // async function addToken(){
+    
+  
+  //  try {
+  //   // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  //   const wasAdded = await ethereum.request({
+  //     method: 'wallet_watchAsset',
+  //     params: {
+  //       type: 'ERC20', // Initially only supports ERC20, but eventually more!
+  //       options: {
+  //         address: currency.address, // The address that the token is at.
+  //         symbol: currency.symbol, // A ticker symbol or shorthand, up to 5 chars.
+  //         decimals: currency.decimals, // The number of decimals in the token
+  //         image: currency.tokenInfo.logoURI, // A string url of the token logo
+  //       },
+  //     },
+  //   });
+  
+  //   if (wasAdded) {
+  //     console.log('Thanks for your interest!');
+  //   } else {
+  //     console.log('Your loss!');
+  //   }
+  //  } catch (error) {
+  //   console.log(error);
+  //  }
+  // }
 
+   
   // only show add or remove buttons if not on selected list
   return (
     <MenuItem
@@ -110,11 +140,11 @@ function CurrencyRow({
       disabled={isSelected}
       selected={otherSelected}
     >
-      <CurrencyLogo currency={currency} size={'24px'} />
+      <CurrencyLogo currency={currency} size={'24px'} style={{color: "black"}} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
           {currency.symbol}
-        </Text>
+        </Text> 
         <TYPE.darkGray ml="0px" fontSize={'12px'} fontWeight={300}>
           {currency.name} {!isOnSelectedList && customAdded && '• Added by user'}
         </TYPE.darkGray>
@@ -138,7 +168,7 @@ export default function CurrencyList({
   showImportView,
   setImportToken,
 }: {
-  height: number;
+  height: number | string;
   currencies: Currency[];
   selectedCurrency?: Currency | null;
   onCurrencySelect: (currency: Currency) => void;

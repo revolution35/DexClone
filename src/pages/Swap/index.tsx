@@ -275,14 +275,15 @@ export default function Swap() {
             />
             <AutoColumn justify="space-between">
               <AutoRow justify={'center'} style={{ padding: '0 1rem' }}>
-                <ArrowWrapper clickable>
-                <FontAwesomeIcon icon={solid("rotate")}
+                <ArrowWrapper clickable
+                 onClick={() => {
+                  setApprovalSubmitted(false); // reset 2 step UI for approvals
+                  onSwitchTokens();
+                  }}>
+                  <FontAwesomeIcon icon={solid("rotate")}
                   color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.text6 : theme.text2}
-                   onClick={() => {
-                      setApprovalSubmitted(false); // reset 2 step UI for approvals
-                      onSwitchTokens();
-                    }}
-                  style={{ backgroundColor: theme.bg3, padding: "10px", borderRadius: "15px", border: "4px solid #FFFFFF", fontSize: "15px", position: "relative", bottom: "14px"}} />
+                   
+                  style={{position: "relative", bottom: "2px"}} />
                   {/* <ArrowDown
                     size="16"
                    
@@ -357,7 +358,7 @@ export default function Swap() {
          
 
             {!account ? (
-              <ButtonPrimary onClick={toggleWalletModal} style={{ backgroundColor: theme.bg7 }} >
+              <ButtonPrimary onClick={toggleWalletModal} style={{ backgroundColor: theme.bg7, color: theme.text6 }} >
                 <FontAwesomeIcon icon={solid("circle-nodes")} style={{fontSize: "20px", marginRight: "5px"}} />
                 Connect Wallet</ButtonPrimary>
             ) : showWrap ? (

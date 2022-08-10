@@ -12,8 +12,8 @@ export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const FACTORY_ADDRESS = '0x91F06F59697159b6Cd297AC401d9DAb1bC14aF75';
 export const ROUTER_ADDRESS = '0x925097796B9b0eCFd5dE684504A4205aaf3f5eae';
 
-export const LP_TOKEN_NAME = 'Pancake LPs';
-export const LP_TOKEN_SYMBOL = 'Cake-LP';
+export const LP_TOKEN_NAME = 'POLYX LP Token';
+export const LP_TOKEN_SYMBOL = 'PLX-LP';
 
 // a list of tokens by chain
 type ChainTokenList = {

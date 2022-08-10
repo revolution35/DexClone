@@ -27,21 +27,24 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   font-size: 20px;
   font-weight: 500;
   border: none;
-  background-color: ${({ theme }) => theme.bg3};
-  color: ${({ selected, theme }) => (selected ? theme.green : theme.text1)};
-  border-radius: 12px;
+  background-color: ${({ selected, theme }) => (selected ? theme.text7 : theme.green)};
+  color: ${({ selected, theme }) => (selected ? theme.text8 : theme.text7)};
+  border-radius: 20px;
   outline: none;
   cursor: pointer;
   user-select: none;
-  border: none;
   padding: 0 0.5rem;
   transition: 0.2s;
-  box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 6px 10px;
+ 
 
-  :focus,
+  :focus{ 
+  }
   :hover {
-    background-color: ${({ theme }) => theme.text6};
-    color: ${({ theme }) => theme.text7};
+    transform: scale(0.98);
+    box-shadow: rgb(0 0 0 / 4%) 0px 6px 10px;
+    
+  }
   }
 `;
 

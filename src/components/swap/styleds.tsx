@@ -11,15 +11,26 @@ export const Wrapper = styled.div`
   height: fit-content;
 `;
 
+
+
+
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
   padding: 0px;
   z-index: 2;
+  height: 42px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 3px solid #FFFFFF;
+  font-size: 16px;
+  position: relative;
+  bottom: 14px;
+  background-color: ${({ theme }) => theme.bg3};
   ${({ clickable }) =>
     clickable
       ? css`
           :hover {
             cursor: pointer;
-            opacity: 0.8;
+            opacity: 1.2;           
           }
         `
       : null}

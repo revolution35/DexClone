@@ -1,6 +1,6 @@
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { darken, lighten } from 'polished';
+import { darken } from 'polished';
 import React, { useMemo } from 'react';
 import { Activity } from 'react-feather';
 import { useTranslation } from 'react-i18next';
@@ -24,11 +24,12 @@ import { TransactionDetails } from '../../state/transactions/reducer';
 import { shortenAddress } from '../../utils';
 import { ButtonSecondary } from '../Button';
 
-import Identicon from '../Identicon';
+// import Identicon from '../Identicon';
 import Loader from '../Loader';
 
 import { RowBetween } from '../Row';
 import WalletModal from '../WalletModal';
+import userIcon from "../../assets/svg/donut_small.svg"
 
 const IconWrapper = styled.div<{ size?: number }>`
   ${({ theme }) => theme.flexColumnNoWrap};
@@ -48,9 +49,10 @@ const Web3StatusGeneric = styled(ButtonSecondary)`
   border-radius: 12px;
   cursor: pointer;
   user-select: none;
-  :focus {
-    outline: none;
-  }
+  border: none;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.3);
+
+  
 `;
 const Web3StatusError = styled(Web3StatusGeneric)`
   background-color: ${({ theme }) => theme.red1};
@@ -69,9 +71,9 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
   color: ${({ theme }) => theme.primaryText1};
   font-weight: 500;
 
-  :hover,
-  :focus {
-    border: 1px solid ${({ theme }) => darken(0.05, theme.primary4)};
+
+  :hover {
+    border: 2px solid ${({ theme }) => darken(0.05, theme.primary4)};
     color: ${({ theme }) => theme.primaryText1};
   }
 
@@ -79,12 +81,8 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
     faded &&
     css`
       background-color: ${({ theme }) => theme.primary6};
-      border: 1px solid ${({ theme }) => theme.primary6};
       color: ${({ theme }) => theme.primary1};
-
-      :hover,
-      :focus {
-        border: 1px solid ${({ theme }) => darken(0.05, theme.primary4)};
+      :hover {
         color: ${({ theme }) => darken(0.05, theme.primaryText1)};
       }
     `}
@@ -92,16 +90,11 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
 
 const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
   background-color: ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg7)};
-  border: 1px solid ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg3)};
   color: ${({ pending, theme }) => (pending ? theme.white : theme.text1)};
   font-weight: 500;
-  :hover,
-  :focus {
-    background-color: ${({ pending, theme }) => (pending ? darken(0.05, theme.primary1) : lighten(0.05, theme.bg2))};
+  :hover{
+    border: 1px solid ${({ theme }) => theme.primary3};
 
-    :focus {
-      border: 1px solid ${({ pending, theme }) => (pending ? darken(0.1, theme.primary1) : darken(0.1, theme.bg3))};
-    }
   }
 `;
 
@@ -130,7 +123,7 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
 // eslint-disable-next-line react/prop-types
 function StatusIcon({ connector }: { connector: AbstractConnector }) {
   if (connector === injected) {
-    return <Identicon />;
+    return  <img width={16} src={userIcon} alt={'User'} style={{marginRight: "5px"}}/>;
   } else if (connector === walletconnect) {
     return (
       <IconWrapper size={16}>
@@ -181,6 +174,7 @@ function Web3StatusInner() {
   if (account) {
     return (
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
+        {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
         {hasPendingTransactions ? (
           <RowBetween>
             <Text>{pending?.length} Pending</Text> <Loader stroke="white" />
@@ -190,7 +184,7 @@ function Web3StatusInner() {
             <Text>{ENSName || shortenAddress(account)}</Text>
           </>
         )}
-        {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
+        
       </Web3StatusConnected>
     );
   } else if (error) {

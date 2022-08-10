@@ -24,6 +24,7 @@ import { ButtonPrimary } from 'components/Button';
 
 const ContentWrapper = styled(Column)`
   width: 100%;
+  height: 100%;
   flex: 1 1;
   position: relative;
 `;
@@ -209,19 +210,19 @@ export function CurrencySearch({
         </Column>
       ) : filteredSortedTokens?.length > 0 || (showExpanded && inactiveTokens && inactiveTokens.length > 0) ? (
         <div style={{ flex: '1' }}>
-          <CurrencyList
-            height={500}
-            showETH={showETH}
-            currencies={
-              showExpanded && inactiveTokens ? filteredSortedTokens.concat(inactiveTokens) : filteredSortedTokens
-            }
-            onCurrencySelect={handleCurrencySelect}
-            otherCurrency={otherSelectedCurrency}
-            selectedCurrency={selectedCurrency}
-            fixedListRef={fixedList}
-            showImportView={showImportView}
-            setImportToken={setImportToken}
-          />
+              <CurrencyList
+                height={650}
+                showETH={showETH}
+                currencies={
+                  showExpanded && inactiveTokens ? filteredSortedTokens.concat(inactiveTokens) : filteredSortedTokens
+                }
+                onCurrencySelect={handleCurrencySelect}
+                otherCurrency={otherSelectedCurrency}
+                selectedCurrency={selectedCurrency}
+                fixedListRef={fixedList}
+                showImportView={showImportView}
+                setImportToken={setImportToken}
+              />
         </div>
       ) : (
         <Column style={{ padding: '20px', height: '100%' }}>

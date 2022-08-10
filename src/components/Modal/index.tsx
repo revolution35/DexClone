@@ -39,12 +39,13 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.95, theme.shadow1)};
     padding: 0px;
     width: 50vw;
+    height: auto;
     overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
     overflow-x: hidden;
 
     align-self: ${({ mobile }) => (mobile ? 'flex-end' : 'center')};
 
-    max-width: 420px;
+    max-width: 570px;
     ${({ maxHeight }) =>
       maxHeight &&
       css`
@@ -53,16 +54,16 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     ${({ minHeight }) =>
       minHeight &&
       css`
-        min-height: ${minHeight}vh;
+        min-height: auto;
       `}
     display: flex;
     border-radius: 20px;
     ${({ theme }) => theme.mediaWidth.upToMedium`
-      width: 65vw;
+      width: 75vw;
       margin: 0;
     `}
     ${({ theme, mobile }) => theme.mediaWidth.upToSmall`
-      width:  85vw;
+      width:  95vw;
       ${
         mobile &&
         css`
@@ -88,7 +89,7 @@ interface ModalProps {
 export default function Modal({
   isOpen,
   onDismiss,
-  minHeight = false,
+  minHeight = 90,
   maxHeight = 90,
   initialFocusRef,
   children,

@@ -50,7 +50,8 @@ export function colors(darkMode: boolean): Colors {
     text4: darkMode ? '#565A69' : '#C3C5CB',
     text5: darkMode ? '#2C2F36' : '#EDEEF2',
     text6: darkMode ? '#41a07b' : '#41a07b',
-    text7: darkMode ? '#000000' : '#FFFFFF',
+    text7: darkMode ? '#1d1f24' : '#FFFFFF',
+    text8: darkMode ? '#41a07b' : '#1d1f24',
 
     // backgrounds / greys
     bg1: darkMode ? '#1d1f24' : '#fafafa',
@@ -59,8 +60,9 @@ export function colors(darkMode: boolean): Colors {
     bg4: darkMode ? '#4c4f5c' : '#CED0D9',
     bg5: darkMode ? '#6C7284' : '#888D9B',
     bg6: darkMode ? '#27292e' : '#ebf3fa',
-    bg7: darkMode ? '#27292e' : 'rgba(65, 160, 123, 0.12)',
+    bg7: darkMode ? '#27292e' : '#e8f4ef',
     bg8: darkMode ? bgd :  bg,
+    bg9: darkMode ? '#3a3d47' : '#d7e9eb',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
@@ -183,7 +185,7 @@ export const TYPE = {
 
 export const FixedGlobalStyle = createGlobalStyle`
 html, input, textarea, button {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Open Sans';
   font-display: fallback;
 }
 
@@ -206,7 +208,6 @@ button {
 }
 
 html {
-  font-size: 18px;
   font-variant: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

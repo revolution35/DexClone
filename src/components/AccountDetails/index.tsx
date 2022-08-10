@@ -4,7 +4,6 @@ import styled, { ThemeContext } from 'styled-components';
 import { useActiveWeb3React } from '../../hooks';
 import { AppDispatch } from '../../state';
 import { clearAllTransactions } from '../../state/transactions/actions';
-import { shortenAddress } from '../../utils';
 import { AutoRow } from '../Row';
 import Copy from './Copy';
 import Transaction from './Transaction';
@@ -18,6 +17,7 @@ import {
   walletlink,
   // fortmatic, portis
 } from '../../connectors';
+import metaMaskIcon from "../../assets/images/metamask.png";
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg';
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg';
 // import FortmaticIcon from '../../assets/images/fortmaticIcon.png';
@@ -26,6 +26,9 @@ import Identicon from '../Identicon';
 import { ButtonSecondary } from '../Button';
 import { ExternalLink as LinkIcon } from 'react-feather';
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme';
+import donut from "../../assets/svg/donut_small.svg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { regular, solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -44,7 +47,7 @@ const UpperSection = styled.div`
     margin: 0;
     margin-bottom: 0.5rem;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   h5:last-child {
@@ -53,14 +56,13 @@ const UpperSection = styled.div`
 
   h4 {
     margin-top: 0;
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
 
 const InfoCard = styled.div`
   padding: 1rem;
-  border: 1px solid ${({ theme }) => theme.bg3};
-  border-radius: 20px;
+  border-radius: 16px;
   position: relative;
   display: grid;
   grid-row-gap: 12px;
@@ -106,6 +108,7 @@ const LowerSection = styled.div`
   background-color: ${({ theme }) => theme.bg2};
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  text-align: center;
 
   h5 {
     margin: 0;
@@ -116,12 +119,15 @@ const LowerSection = styled.div`
 
 const AccountControl = styled.div`
   display: flex;
+  margin-top: 20px;
   justify-content: space-between;
   min-width: 0;
   width: 100%;
+  text-aligin: centr;
 
-  font-weight: 500;
-  font-size: 1.25rem;
+
+  
+
 
   a:hover {
     text-decoration: underline;
@@ -133,8 +139,20 @@ const AccountControl = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    font-stretch: 10% 500%;
+    border: 3px dashed ${({ theme }) => theme.bg3};
+
   }
 `;
+
+
+
 
 const AddressLink = styled(ExternalLink)<{ hasENS: boolean; isENS: boolean }>`
   font-size: 0.825rem;
@@ -243,7 +261,10 @@ export default function AccountDetails({
           SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0];
-    return <WalletName>Connected with {name}</WalletName>;
+    return <WalletName>
+    Connected with {name} 
+    <img width={16} src={metaMaskIcon} alt={'MetaMask logo'} style={{marginLeft: "5px"}}/>
+      </WalletName>;
   }
 
   function getStatusIcon() {
@@ -315,6 +336,8 @@ export default function AccountDetails({
                         (connector as any).close();
                       }}
                     >
+                        <FontAwesomeIcon icon={solid("right-from-bracket")}
+         style={{marginRight: "5px"}} />
                       Disconnect
                     </WalletAction>
                   )}
@@ -324,6 +347,8 @@ export default function AccountDetails({
                       openOptions();
                     }}
                   >
+          <FontAwesomeIcon icon={solid("wrench")}
+         style={{marginRight: "5px"}} />
                     Change
                   </WalletAction>
                 </div>
@@ -340,8 +365,8 @@ export default function AccountDetails({
                   ) : (
                     <>
                       <div>
-                        {getStatusIcon()}
-                        <p> {account && shortenAddress(account)}</p>
+                        
+                        <p>  <img width={16} src={donut} alt={'User'} style={{marginRight: "5px"}}/>  {account && account}</p>
                       </div>
                     </>
                   )}
@@ -351,7 +376,7 @@ export default function AccountDetails({
                 {ENSName ? (
                   <>
                     <AccountControl>
-                      <div>
+                      <div style={{ position: "absolute", display: "block", textAlign: "end"}}>
                         {account && (
                           <Copy toCopy={account}>
                             <span style={{ marginLeft: '4px' }}>Copy Address</span>
@@ -409,7 +434,10 @@ export default function AccountDetails({
         </LowerSection>
       ) : (
         <LowerSection>
-          <TYPE.body color={theme.text1}>Your transactions will appear here...</TYPE.body>
+          <TYPE.body color={theme.text1}> 
+          <FontAwesomeIcon icon={regular("circle-check")}
+         style={{marginRight: "5px"}} />
+            Your transactions will appear here...</TYPE.body>
         </LowerSection>
       )}
     </>

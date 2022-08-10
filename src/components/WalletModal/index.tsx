@@ -110,6 +110,7 @@ const OptionGrid = styled.div`
 const HoverText = styled.div`
   :hover {
     cursor: pointer;
+    color: ${({ theme }) => theme.text7};
   }
 `;
 
@@ -289,7 +290,7 @@ export default function WalletModal({
           <HeaderRow>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error connecting'}</HeaderRow>
           <ContentWrapper>
             {error instanceof UnsupportedChainIdError ? (
-              <h5>Please connect to the appropriate Ethereum network.</h5>
+              <h5>Please connect to the appropriate BSC network.</h5>
             ) : (
               'Error connecting. Try refreshing the page.'
             )}

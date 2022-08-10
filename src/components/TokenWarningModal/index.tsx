@@ -15,7 +15,7 @@ export default function TokenWarningModal({
   const handleDismiss = useCallback(() => null, []);
 
   return (
-    <Modal isOpen={isOpen} onDismiss={handleDismiss} maxHeight={90}>
+    <Modal isOpen={isOpen} onDismiss={handleDismiss} maxHeight={90} minHeight={90}>
       <ImportToken tokens={tokens} handleCurrencySelect={onConfirm} />
     </Modal>
   );

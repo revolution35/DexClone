@@ -19,7 +19,7 @@ import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redir
 import Swap from './Swap';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 import bg from '../assets/svg/bg_top_svg.svg';
-// import bgd from '../assets/images/bg_img_darck.png';
+import bgd from '../assets/images/bg_img_header_darck.png';
 
 console.log(DarkModeQueryParamReader);
 
@@ -30,7 +30,7 @@ const AppWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   overflow-x: hidden;
-  background-image: url(${({ theme }) => theme.text1 !=='#FFFFFF'? bg : "#27292e" });
+  background-image: url(${({ theme }) => theme.text1 !=='#FFFFFF'? bg : bgd });
   background-position: top;
   background-repeat: no-repeat;
   background-size: 100%;

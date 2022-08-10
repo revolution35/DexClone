@@ -17,6 +17,8 @@ import { useActiveWeb3React } from '../../hooks';
 import { usePairs } from '../../data/Reserves';
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks';
 import { Dots } from '../../components/swap/styleds';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { regular, solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -50,8 +52,8 @@ const ResponsiveButtonPrimary = styled(ButtonPrimary)`
 `;
 
 const EmptyProposals = styled.div`
-  border: 1px solid ${({ theme }) => theme.text4};
-  padding: 16px 12px;
+  
+  padding: 50px 50px 50px 50px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -95,32 +97,35 @@ export default function Pool() {
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair));
 
   return (
-    <AppBody>
-      <PageWrapper>
-        <SwapPoolTabs active={'pool'} />
-        <AutoColumn gap="lg" justify="center">
-          <AutoColumn gap="lg" style={{ width: '100%' }}>
-            <TitleRow style={{ marginTop: '1rem' }} padding={'0'}>
+    <div style={{ padding: "20px" }}>   
+       <TitleRow style={{ marginTop: '1rem', marginBottom: "15px"}} padding={'0'}>
               <HideSmall>
-                <TYPE.mediumHeader style={{ justifySelf: 'flex-start' }}>
-                  Your liquidity
+                <TYPE.mediumHeader style={{ justifySelf: 'flex-start', marginRight: "50px" }}>
+                  Pools Overview
                 </TYPE.mediumHeader>
               </HideSmall>
               <ButtonRow>
                 <ResponsiveButtonPrimary as={Link} padding="6px 10px" to="/create/ETH">
-                  Create a pair
+                  + New Position
                 </ResponsiveButtonPrimary>
                 <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 10px" to="/add/ETH">
-                  <Text fontWeight={500} fontSize={16}>
+                  <Text fontWeight={500} fontSize={18}>
                     Add Liquidity
                   </Text>
                 </ResponsiveButtonPrimary>
               </ButtonRow>
             </TitleRow>
+    <AppBody>
+      <PageWrapper>
+        <SwapPoolTabs active={'pool'} />
+        <AutoColumn gap="lg" justify="center">
+          <AutoColumn gap="lg" style={{ width: '100%' }}>
+        
 
             {!account ? (
               <Card padding="40px">
                 <TYPE.body color={theme.text3} textAlign="center">
+                <FontAwesomeIcon icon={solid("circle-nodes")} style={{ width: "50px"}}/>
                   Connect to a wallet to view your liquidity.
                 </TYPE.body>
               </Card>
@@ -137,11 +142,16 @@ export default function Pool() {
                 ))}
               </>
             ) : (
-              <EmptyProposals>
-                <TYPE.body color={theme.text3} textAlign="center">
-                  No Liquidity found
-                </TYPE.body>
+            
+                
+              <EmptyProposals >
+                 <FontAwesomeIcon icon={regular("rectangle-list")} color={theme.text3} style={{fontSize: "60px", padding: "30px"}}/>
+                <TYPE.body color={theme.text3} textAlign="center"  > 
+               
+                  Your active liquidity positions will apper here.
+                </TYPE.body> 
               </EmptyProposals>
+             
             )}
                <AutoColumn justify={'center'} gap="md">
               <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
@@ -155,5 +165,6 @@ export default function Pool() {
         </AutoColumn>
       </PageWrapper>
     </AppBody>
+    </div>
   );
 }

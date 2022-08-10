@@ -1,0 +1,19 @@
+.iconRotate{
+color: white;
+}
+.iconRotate:hover{
+    animation: rotate 1s infinite linear;
+
+
+}
+
+@keyframes rotate{
+    from{
+        transform: rotate(0deg) scale(1);
+    }
+   
+    to{
+        transform: rotate(180deg) scale(1);
+    }
+    
+}

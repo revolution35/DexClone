@@ -4,10 +4,10 @@ import { Text } from 'rebass';
 import { NavLink } from 'react-router-dom';
 import { darken } from 'polished';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
-import Logo from '../../assets/svg/logo.svg';
-import LogoDark from '../../assets/svg/logo_white.svg';
+import Logo from '../../assets/images/logo_wait_them.png';
+import LogoDark from '../../assets/images/logo_darck.png';
 import { useActiveWeb3React } from '../../hooks';
 import { useDarkModeManager } from '../../state/user/hooks';
 import { useETHBalances } from '../../state/wallet/hooks';
@@ -106,17 +106,15 @@ const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg7)};
+  border: 3px solid ${({  theme }) => (theme.text7)};
+  background-color: ${({ theme, active }) => (!active ? theme.bg2 : theme.bg9)};
   border-radius: 0.8rem;
   white-space: nowrap;
   width: 100%;
+  padding: none:
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px,
     rgba(0, 0, 0, 0.01) 0px 24px 32px;
-
-  :focus {
-    border: 1px solid blue;
-  }
 `;
 
 const HideSmall = styled.span`
@@ -187,17 +185,18 @@ const StyledNavLink = styled(NavLink).attrs({
   transition: 0.3s;
 
   &:not(:last-child) {
-    margin-right: 0.16rem;
+    margin-right: 1.5rem;
+    margin-left: 5px;
   }
 
   &.${activeClassName} {
-    color: ${({ theme }) => theme.text1};
+    color: ${({ theme }) => theme.green};
     background-color: ${({ theme }) => theme.bg3};
   }
 
   :hover,
   :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
+    color: ${({ theme }) => darken(0.1, theme.green)};
   }
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -253,7 +252,7 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React();
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
   const [darkMode, toggleDarkMode] = useDarkModeManager();
 
@@ -268,8 +267,8 @@ export default function Header() {
       </HeaderRow>
       <HeaderLinks>
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-        <FontAwesomeIcon icon={solid("rotate")} style={{color: "#41a07b", fontSize: "20px", marginRight: "5px"}}/>
-         {t('swap')}
+        <FontAwesomeIcon icon={solid("rotate")} style={{fontSize: "19px", marginRight: "5px", }}/>
+         {'Swap'}
         </StyledNavLink>
         <StyledNavLink
           id={`pool-nav-link`}
@@ -282,12 +281,12 @@ export default function Header() {
             pathname.startsWith('/find')
           }
         >
-          <FontAwesomeIcon icon={solid("briefcase")} style={{color: "#41a07b", fontSize: "20px", marginRight: "5px"}}/>
-          {t('pool')}
+          <FontAwesomeIcon icon={solid("briefcase")} style={{ fontSize: "19px", marginRight: "5px",}}/>
+          {'Pool'}
         </StyledNavLink>
         <StyledNavLink id={`stats-nav-link`} to={'/stats'}>
-        <FontAwesomeIcon icon={solid("chart-simple")} style={{color: "#41a07b", fontSize: "20px", marginRight: "5px"}}/>
-          Статистика
+        <FontAwesomeIcon icon={solid("chart-simple")} style={{ fontSize: "19px", marginRight: "5px"}}/>
+        Overview
         </StyledNavLink>
       </HeaderLinks>
 
@@ -300,7 +299,7 @@ export default function Header() {
           </HideSmall>
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
-              <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+              <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={700}>
                 {userEthBalance?.toSignificant(4)} BNB
               </BalanceText>
             ) : null}
