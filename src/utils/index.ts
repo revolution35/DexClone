@@ -33,7 +33,7 @@ export function getEtherscanLink(
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
   const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`;
-  if( chainId = 56 ){
+  if ((chainId = 56)) {
     switch (type) {
       case 'transaction': {
         return `https://bscscan.com/tx/${data}`;
