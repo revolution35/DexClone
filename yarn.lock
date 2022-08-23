@@ -7456,13 +7456,6 @@
   "resolved" "https://registry.npmjs.org/ethereum-protocol/-/ethereum-protocol-1.0.1.tgz"
   "version" "1.0.1"
 
-"ethereumjs-abi@^0.6.8", "ethereumjs-abi@git+https://github.com/ethereumjs/ethereumjs-abi.git":
-  "resolved" "git+ssh://git@github.com/ethereumjs/ethereumjs-abi.git#ee3994657fa7a427238e6ba92a84d0b529bbcde0"
-  "version" "0.6.8"
-  dependencies:
-    "bn.js" "^4.11.8"
-    "ethereumjs-util" "^6.0.0"
-
 "ethereumjs-abi@0.6.5":
   "integrity" "sha512-rCjJZ/AE96c/AAZc6O3kaog4FhOsAViaysBxqJNy2+LHP0ttH0zkZ7nXdVHOAyt6lFwLO0nlCwWszysG/ao1+g=="
   "resolved" "https://registry.npmjs.org/ethereumjs-abi/-/ethereumjs-abi-0.6.5.tgz"
